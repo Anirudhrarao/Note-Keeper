@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>📒 Note Keeper</title>
+  <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+ <div class="container">
+  <!-- Left: Form -->
+  <div class="form-section">
+    <h2>Add a Note</h2>
+    <form action="/add" method="POST">
+      <input type="text" name="title" placeholder="Title" required />
+      <textarea name="content" placeholder="Content" required></textarea>
+      <button type="submit">Add Note</button>
+    </form>
+  </div>
+
+  <!-- Right: Notes -->
+  <div class="notes-section">
+    <h1>📝 Your Notes</h1>
+    <ul>
+      <% if (notes.length === 0) { %>
+        <li><div class="note-content">No notes yet. Start writing!</div></li>
+      <% } else { %>
+        <% notes.forEach((note, index) => { %>
+          <li>
+            <div class="note-content">
+              <div class="note-title"><%= note.title %></div>
+              <div class="note-text"><%= note.content %></div>
+            </div>
+            <form action="/delete/<%= index %>" method="POST">
+              <button>🗑️</button>
+            </form>
+          </li>
+        <% }) %>
+      <% } %>
+    </ul>
+  </div>
+</div>
+
+</body>
+</html>
